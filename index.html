@@ -9,7 +9,7 @@
 <body>
     <div class="dance-background">
         <video autoplay muted loop playsinline>
-            <source src="dance.mp4" type="video/mp4">
+            <source src="dance_armenian.mp4" type="video/mp4">
         </video>
         <div class="dance-overlay"></div>
     </div>
@@ -22,7 +22,10 @@
 
         <!-- Главный текст "Скоро открытие" -->
         <main class="main-content">
-            <h1 class="opening-soon">USKORO OTVARANJE</h1>
+            <h1 class="opening-soon">
+                <span class="opening-line1">Otvaranje</span>
+                <span class="opening-line2">1. Februara</span>
+            </h1>
         </main>
 
         <!-- Секция доставки -->
@@ -47,5 +50,45 @@
             </div>
         </footer>
     </div>
+
+    <!-- Popup -->
+    <div id="delivery-popup" class="popup-overlay">
+        <div class="popup-content">
+            <button class="popup-close">&times;</button>
+            <h2 class="popup-text">Uskoro</h2>
+        </div>
+    </div>
+
+    <script>
+        // Получаем элементы
+        const popup = document.getElementById('delivery-popup');
+        const woltLink = document.getElementById('wolt-link');
+        const glovoLink = document.getElementById('glovo-link');
+        const closeBtn = document.querySelector('.popup-close');
+
+        // Показать popup при клике на Wolt
+        woltLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            popup.classList.add('active');
+        });
+
+        // Показать popup при клике на Glovo
+        glovoLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            popup.classList.add('active');
+        });
+
+        // Закрыть popup при клике на кнопку закрытия
+        closeBtn.addEventListener('click', function() {
+            popup.classList.remove('active');
+        });
+
+        // Закрыть popup при клике вне контента
+        popup.addEventListener('click', function(e) {
+            if (e.target === popup) {
+                popup.classList.remove('active');
+            }
+        });
+    </script>
 </body>
 </html>
