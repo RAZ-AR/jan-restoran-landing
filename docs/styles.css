@@ -221,7 +221,9 @@ body {
 }
 
 .phone a,
-.telegram a {
+.telegram a,
+.whatsapp a,
+.instagram a {
     color: #ffffff;
     text-decoration: none;
     transition: color 0.3s ease;
@@ -229,7 +231,9 @@ body {
 }
 
 .phone a:hover,
-.telegram a:hover {
+.telegram a:hover,
+.whatsapp a:hover,
+.instagram a:hover {
     color: #ffd700;
     border-bottom-color: #ffd700;
 }
