@@ -140,6 +140,13 @@ body {
     max-width: 500px;
 }
 
+.delivery-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
 .wolt-logo-link {
     display: inline-block;
     transition: transform 0.3s ease;
