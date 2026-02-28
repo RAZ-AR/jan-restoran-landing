@@ -1,12 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
 
-@font-face {
-    font-family: 'SFT Schrifted Serif';
-    src: url('SFT Schrifted Serif TRIAL Display Bold.ttf') format('truetype');
-    font-weight: 700;
-    font-style: normal;
-}
-
 * {
     margin: 0;
     padding: 0;
@@ -18,12 +11,10 @@ html, body {
 }
 
 body {
-    font-family: 'Roboto', 'Arial', sans-serif;
-    overflow-x: hidden;
-    min-height: 100vh;
+    overflow: hidden;
 }
 
-/* Video background — identical to main page */
+/* Video background */
 .dance-background {
     position: fixed;
     top: 0;
@@ -56,66 +47,53 @@ body {
     z-index: 1;
 }
 
-/* Page layout */
+/* Page: full screen, split into top (logo) + bottom (grid) */
 .page {
     position: relative;
     z-index: 2;
-    max-width: 480px;
-    margin: 0 auto;
-    padding: 2rem 1.2rem 3rem;
-    min-height: 100vh;
+    height: 100dvh;
     display: flex;
     flex-direction: column;
-    align-items: center;
 }
 
-/* Header */
+/* Top half — logo centered */
 .header {
-    text-align: center;
-    padding: 1.8rem 0 2rem;
-    width: 100%;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .logo {
-    width: 140px;
+    width: 150px;
     height: auto;
     filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
-    display: block;
-    margin: 0 auto 0.7rem;
 }
 
-.tagline {
-    font-size: 0.82rem;
-    color: rgba(255, 255, 255, 0.55);
-    letter-spacing: 0.05em;
-}
-
-/* Grid */
-.grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.85rem;
-    width: 100%;
-}
-
-/* Liquid glass card */
-.card {
+/* Bottom half — icon grid */
+.contacts {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    padding: 1.5rem 1.2rem 2.5rem;
+}
+
+/* Liquid glass card — icon only */
+.card {
+    width: 72px;
+    height: 72px;
+    display: flex;
     align-items: center;
     justify-content: center;
     text-decoration: none;
-    color: white;
-    padding: 1.5rem 1rem 1.3rem;
-    border-radius: 20px;
-    min-height: 120px;
-    gap: 0.6rem;
-    text-align: center;
+    border-radius: 18px;
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
     user-select: none;
     position: relative;
     overflow: hidden;
+    flex-shrink: 0;
 
     background: linear-gradient(
         135deg,
@@ -133,7 +111,7 @@ body {
     transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-/* Glass highlight strip at top */
+/* Glass sheen */
 .card::before {
     content: '';
     position: absolute;
@@ -146,86 +124,34 @@ body {
         rgba(255, 255, 255, 0.18) 0%,
         rgba(255, 255, 255, 0) 100%
     );
-    border-radius: 20px 20px 0 0;
+    border-radius: 18px 18px 0 0;
     pointer-events: none;
 }
 
-.card:active {
-    transform: translateY(-1px) scale(0.97);
-}
-
-/* Wide card (Google Maps) */
-.card.wide {
-    grid-column: 1 / -1;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 1.2rem;
-    padding: 1.2rem 1.5rem;
-    min-height: auto;
-    text-align: left;
-}
-
-/* Icon */
-.card-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 52px;
-    height: 52px;
-    flex-shrink: 0;
-}
-
-.card-icon img {
-    width: 46px;
-    height: 46px;
+.card img {
+    width: 38px;
+    height: 38px;
     object-fit: contain;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.25));
+    position: relative;
+    z-index: 1;
 }
 
-.card-icon svg {
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+.card svg {
+    width: 38px;
+    height: 38px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.25));
+    position: relative;
+    z-index: 1;
 }
 
-/* Tinted icon backgrounds */
-.icon-phone {
-    background: rgba(52, 199, 89, 0.25);
-    border-radius: 14px;
-    padding: 6px;
+.card:active {
+    transform: scale(0.93);
 }
 
-.icon-maps {
-    background: rgba(255, 59, 48, 0.25);
-    border-radius: 14px;
-    padding: 6px;
-}
-
-/* Text */
-.card-text {
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
-}
-
-.card-label {
-    font-size: 0.95rem;
-    font-weight: 500;
-    letter-spacing: 0.02em;
-    color: rgba(255, 255, 255, 0.95);
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
-    line-height: 1.2;
-}
-
-.card-sub {
-    font-size: 0.74rem;
-    color: rgba(255, 255, 255, 0.5);
-    margin-top: 0.05rem;
-}
-
-/* Hover — desktop only */
 @media (hover: hover) {
     .card:hover {
-        transform: translateY(-3px) scale(1.02);
+        transform: translateY(-3px) scale(1.05);
         border-color: rgba(255, 255, 255, 0.5);
         box-shadow:
             0 8px 32px rgba(0, 0, 0, 0.25),
@@ -240,18 +166,21 @@ body {
     }
 }
 
-@media (max-width: 360px) {
-    .page {
-        padding: 1.5rem 0.9rem 2.5rem;
-    }
-
+/* Smaller screens */
+@media (max-height: 680px) {
     .card {
-        padding: 1.2rem 0.8rem 1.1rem;
-        min-height: 105px;
+        width: 62px;
+        height: 62px;
     }
 
-    .card-icon img {
-        width: 40px;
-        height: 40px;
+    .card img,
+    .card svg {
+        width: 32px;
+        height: 32px;
+    }
+
+    .contacts {
+        gap: 10px;
+        padding: 1.2rem 1rem 2rem;
     }
 }
