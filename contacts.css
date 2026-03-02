@@ -70,17 +70,17 @@ body {
     filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
 }
 
-/* Promo text between logo and grid */
+/* Promo text above logo */
 .promo-text {
     color: white;
     text-align: center;
     font-family: 'Cormorant Garamond', Georgia, serif;
     font-style: italic;
     font-weight: 600;
-    font-size: 1.55rem;
-    line-height: 1.5;
+    font-size: 2rem;
+    line-height: 1.45;
     letter-spacing: 0.02em;
-    padding: 0 1.5rem 1rem;
+    padding: 1.8rem 1.5rem 0;
     text-shadow:
         0 2px 12px rgba(0, 0, 0, 0.7),
         0 0 40px rgba(255, 200, 180, 0.25);
