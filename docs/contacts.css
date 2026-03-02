@@ -74,10 +74,10 @@ body {
 .promo-text {
     color: white;
     text-align: center;
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-style: italic;
-    font-weight: 600;
-    font-size: 2rem;
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 4rem;
     line-height: 1.45;
     letter-spacing: 0.02em;
     padding: 1.8rem 1.5rem 0;
