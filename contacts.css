@@ -70,6 +70,16 @@ body {
     filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
 }
 
+/* Promo text between logo and grid */
+.promo-text {
+    color: white;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    padding: 0 1.2rem 0.8rem;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
 /* Bottom half — icon grid */
 .contacts {
     display: flex;
