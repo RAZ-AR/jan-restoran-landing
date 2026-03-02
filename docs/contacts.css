@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,400;1,600&family=Roboto:wght@400;500&display=swap');
 
 * {
     margin: 0;
@@ -74,10 +74,16 @@ body {
 .promo-text {
     color: white;
     text-align: center;
-    font-family: 'Roboto', sans-serif;
-    font-size: 1rem;
-    padding: 0 1.2rem 0.8rem;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-weight: 600;
+    font-size: 1.55rem;
+    line-height: 1.5;
+    letter-spacing: 0.02em;
+    padding: 0 1.5rem 1rem;
+    text-shadow:
+        0 2px 12px rgba(0, 0, 0, 0.7),
+        0 0 40px rgba(255, 200, 180, 0.25);
 }
 
 /* Bottom half — icon grid */
