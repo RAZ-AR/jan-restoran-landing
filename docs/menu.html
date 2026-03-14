@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ĐAN — Меню</title>
-  <link rel="stylesheet" href="menu.css?v=1">
+  <link rel="stylesheet" href="menu.css?v=2">
 </head>
 <body>
 
@@ -23,13 +23,13 @@
     </div>
   </header>
 
-  <!-- CATEGORY PILLS -->
+  <!-- CATEGORY TABS -->
   <div class="categories-wrap">
     <div class="categories" id="categories"></div>
   </div>
 
-  <!-- MENU -->
-  <main class="menu-grid" id="menu-grid"></main>
+  <!-- MENU CONTENT -->
+  <div class="content" id="content"></div>
 
   <script>
     const LANGS = {
@@ -46,6 +46,18 @@
           'Соусы':      'Соусы',
           'Шаурма':     'Шаурма',
           'Бртуч':      'Бртуч',
+        },
+        catsSub: {
+          'Шашлык':     'Grilled meats',
+          'Рыба':       'Fish',
+          'Овощи':      'Vegetables',
+          'Гарниры':    'Side dishes',
+          'Люля кебаб': 'Lula kebab',
+          'Салаты':     'Salads',
+          'Супы':       'Soups',
+          'Соусы':      'Sauces',
+          'Шаурма':     'Shawarma',
+          'Бртуч':      'Brtuch',
         }
       },
       en: {
@@ -61,6 +73,18 @@
           'Соусы':      'Sauces',
           'Шаурма':     'Shawarma',
           'Бртуч':      'Brtuch',
+        },
+        catsSub: {
+          'Шашлык':     'Шашлык · Grilled meats',
+          'Рыба':       'Рыба · Fish',
+          'Овощи':      'Овощи · Vegetables',
+          'Гарниры':    'Гарниры · Side dishes',
+          'Люля кебаб': 'Люля кебаб · Kebab',
+          'Салаты':     'Салаты · Salads',
+          'Супы':       'Супы · Soups',
+          'Соусы':      'Соусы · Sauces',
+          'Шаурма':     'Шаурма · Shawarma',
+          'Бртуч':      'Бртуч · Brtuch',
         }
       },
       sr: {
@@ -76,152 +100,184 @@
           'Соусы':      'Sosovi',
           'Шаурма':     'Šaurma',
           'Бртуч':      'Brtuch',
+        },
+        catsSub: {
+          'Шашлык':     'Шашлык · Roštilj',
+          'Рыба':       'Рыба · Riba',
+          'Овощи':      'Овощи · Povrće',
+          'Гарниры':    'Гарниры · Prilozi',
+          'Люля кебаб': 'Люля кебаб · Kebab',
+          'Салаты':     'Салаты · Salate',
+          'Супы':       'Супы · Supe',
+          'Соусы':      'Соусы · Sosovi',
+          'Шаурма':     'Шаурма · Šaurma',
+          'Бртуч':      'Бртуч · Brtuch',
         }
       }
     };
 
+    // name field order per language: primary, secondary
+    const NAME_FIELDS = {
+      ru: ['ru', 'sr'],
+      en: ['en', 'ru'],
+      sr: ['sr', 'ru'],
+    };
+
     const MENU = [
       // Шашлык
-      { cat: 'Шашлык', ru: 'Шашлык из свиных рёбер',      sr: 'Šašlik od svinjskih rebara',   en: 'Pork Rib Shashlik',                    price: 1150 },
-      { cat: 'Шашлык', ru: 'Шашлык из свиной шейки',       sr: 'Šašlik od svinjskog vrata',    en: 'Pork Neck Shashlik',                   price: 1250 },
-      { cat: 'Шашлык', ru: 'Корейка свиная на мангале',     sr: 'Svinjska kare na žaru',        en: 'Grilled Pork Loin',                    price: 1900 },
-      { cat: 'Шашлык', ru: 'Шашлык из куриных крылышек',   sr: 'Šašlik krilca',                en: 'Chicken Wing Shashlik',                price:  750 },
-      { cat: 'Шашлык', ru: 'Шашлык из куриной грудки',     sr: 'Šašlik od pilećih file',       en: 'Chicken Breast Shashlik',              price:  800 },
+      { cat: 'Шашлык', ru: 'Шашлык из свиных рёбер',      sr: 'Šašlik od svinjskih rebara',      en: 'Pork Rib Shashlik',               price: 1150 },
+      { cat: 'Шашлык', ru: 'Шашлык из свиной шейки',       sr: 'Šašlik od svinjskog vrata',       en: 'Pork Neck Shashlik',              price: 1250 },
+      { cat: 'Шашлык', ru: 'Корейка свиная на мангале',     sr: 'Svinjska kare na žaru',           en: 'Grilled Pork Loin',               price: 1900 },
+      { cat: 'Шашлык', ru: 'Шашлык из куриных крылышек',   sr: 'Šašlik krilca',                   en: 'Chicken Wing Shashlik',           price:  750 },
+      { cat: 'Шашлык', ru: 'Шашлык из куриной грудки',     sr: 'Šašlik od pilećih file',          en: 'Chicken Breast Shashlik',         price:  800 },
       // Рыба
-      { cat: 'Рыба',   ru: 'Шашлык из лосося',             sr: 'Losos sa salatom',             en: 'Salmon Shashlik',                      price: 1900 },
-      { cat: 'Рыба',   ru: 'Шашлык из форели',             sr: 'Išhan (pastrmka)',              en: 'Trout Shashlik',                       price: 1350 },
+      { cat: 'Рыба',   ru: 'Шашлык из лосося',             sr: 'Losos sa salatom',                en: 'Salmon Shashlik',                 price: 1900 },
+      { cat: 'Рыба',   ru: 'Шашлык из форели',             sr: 'Išhan (pastrmka)',                 en: 'Trout Shashlik',                  price: 1350 },
       // Овощи
-      { cat: 'Овощи',  ru: 'Помидор на гриле',             sr: 'Paradajz sa roštilja',         en: 'Grilled Tomato',                       price:  150 },
-      { cat: 'Овощи',  ru: 'Перец сладкий',                sr: 'Slatka paprika',               en: 'Grilled Bell Pepper',                  price:  150 },
-      { cat: 'Овощи',  ru: 'Перец острый',                 sr: 'Ljuta paprika',                en: 'Grilled Hot Pepper',                   price:  150 },
-      { cat: 'Овощи',  ru: 'Баклажан на гриле',            sr: 'Patlidžan sa roštilja',        en: 'Grilled Eggplant',                     price:  150 },
-      { cat: 'Овощи',  ru: 'Овощи гриль',                  sr: 'Povrće sa roštilja',           en: 'Mixed Grilled Vegetables',             price:  450 },
-      { cat: 'Овощи',  ru: 'Шампиньоны',                   sr: 'Šampinjoni',                   en: 'Grilled Mushrooms',                    price:  550 },
+      { cat: 'Овощи',  ru: 'Помидор на гриле',             sr: 'Paradajz sa roštilja',            en: 'Grilled Tomato',                  price:  150 },
+      { cat: 'Овощи',  ru: 'Перец сладкий',                sr: 'Slatka paprika',                  en: 'Grilled Bell Pepper',             price:  150 },
+      { cat: 'Овощи',  ru: 'Перец острый',                 sr: 'Ljuta paprika',                   en: 'Grilled Hot Pepper',              price:  150 },
+      { cat: 'Овощи',  ru: 'Баклажан на гриле',            sr: 'Patlidžan sa roštilja',           en: 'Grilled Eggplant',                price:  150 },
+      { cat: 'Овощи',  ru: 'Овощи гриль',                  sr: 'Povrće sa roštilja',              en: 'Mixed Grilled Vegetables',        price:  450 },
+      { cat: 'Овощи',  ru: 'Шампиньоны',                   sr: 'Šampinjoni',                      en: 'Grilled Mushrooms',               price:  550 },
       // Гарниры
-      { cat: 'Гарниры',ru: 'Картофель беби',               sr: 'Baby krompir',                 en: 'Baby Potatoes',                        price:  350 },
-      { cat: 'Гарниры',ru: 'Толчёный картофель',           sr: 'Džmbur krompir',               en: 'Mashed Potatoes',                      price:  150 },
+      { cat: 'Гарниры',ru: 'Картофель беби',               sr: 'Baby krompir',                    en: 'Baby Potatoes',                   price:  350 },
+      { cat: 'Гарниры',ru: 'Толчёный картофель',           sr: 'Džmbur krompir',                  en: 'Mashed Potatoes',                 price:  150 },
       // Люля кебаб
-      { cat: 'Люля кебаб', ru: 'Люля кебаб куриный',               sr: 'Pileći ljulja-kebab',           en: 'Chicken Lula Kebab',              price:  900 },
-      { cat: 'Люля кебаб', ru: 'Люля кебаб куриный с сыром',       sr: 'Pileći ljulja sa sirom',        en: 'Chicken & Cheese Lula Kebab',     price:  950 },
-      { cat: 'Люля кебаб', ru: 'Люля кебаб куриный с грибами',     sr: 'Pileći ljulja sa pečurkama',    en: 'Chicken & Mushroom Lula Kebab',   price:  950 },
-      { cat: 'Люля кебаб', ru: 'Люля кебаб говяжий',               sr: 'Goveđi ljulja-kebab',           en: 'Beef Lula Kebab',                 price: 1350 },
-      { cat: 'Люля кебаб', ru: 'Люля кебаб говяжий с сыром',       sr: 'Goveđi ljulja sa sirom',        en: 'Beef & Cheese Lula Kebab',        price: 1400 },
-      { cat: 'Люля кебаб', ru: 'Люля кебаб говяжий с грибами',     sr: 'Goveđi ljulja sa pečurkama',    en: 'Beef & Mushroom Lula Kebab',      price: 1400 },
-      { cat: 'Люля кебаб', ru: 'Люля кебаб из ягнёнка',            sr: 'Jagnjetine ljulja-kebab',       en: 'Lamb Lula Kebab',                 price: 1450 },
+      { cat: 'Люля кебаб', ru: 'Люля кебаб куриный',               sr: 'Pileći ljulja-kebab',         en: 'Chicken Lula Kebab',              price:  900 },
+      { cat: 'Люля кебаб', ru: 'Люля кебаб куриный с сыром',       sr: 'Pileći ljulja sa sirom',      en: 'Chicken & Cheese Lula Kebab',     price:  950 },
+      { cat: 'Люля кебаб', ru: 'Люля кебаб куриный с грибами',     sr: 'Pileći ljulja sa pečurkama',  en: 'Chicken & Mushroom Lula Kebab',   price:  950 },
+      { cat: 'Люля кебаб', ru: 'Люля кебаб говяжий',               sr: 'Goveđi ljulja-kebab',         en: 'Beef Lula Kebab',                 price: 1350 },
+      { cat: 'Люля кебаб', ru: 'Люля кебаб говяжий с сыром',       sr: 'Goveđi ljulja sa sirom',      en: 'Beef & Cheese Lula Kebab',        price: 1400 },
+      { cat: 'Люля кебаб', ru: 'Люля кебаб говяжий с грибами',     sr: 'Goveđi ljulja sa pečurkama',  en: 'Beef & Mushroom Lula Kebab',      price: 1400 },
+      { cat: 'Люля кебаб', ru: 'Люля кебаб из ягнёнка',            sr: 'Jagnjetine ljulja-kebab',     en: 'Lamb Lula Kebab',                 price: 1450 },
       // Салаты
-      { cat: 'Салаты', ru: 'Салат Цезарь с курицей',       sr: 'Cezar salata sa piletinom',    en: 'Caesar Salad with Chicken',            price: 1550 },
-      { cat: 'Салаты', ru: 'Салат с хрустящим баклажаном', sr: 'Salata sa hrskavim patlidžanom',en:'Crispy Eggplant Salad',              price: 1150 },
-      { cat: 'Салаты', ru: 'Салат Оливье',                 sr: 'Ruska salata',                 en: 'Olivier Salad',                        price:  650 },
-      { cat: 'Салаты', ru: 'Винегрет',                     sr: 'Salata Vinaigret',             en: 'Vinaigrette Salad',                    price:  600 },
-      { cat: 'Салаты', ru: 'Греческий салат',              sr: 'Grčka salata',                 en: 'Greek Salad',                          price:  650 },
-      { cat: 'Салаты', ru: 'Тёплый салат с курицей',       sr: 'Topla salata sa piletinom',    en: 'Warm Chicken Salad',                   price: 1450 },
-      { cat: 'Салаты', ru: 'Салат с куриной печенью',      sr: 'Salata sa džigericom',         en: 'Chicken Liver Salad',                  price: 1250 },
-      { cat: 'Салаты', ru: 'Шопский салат',                sr: 'Šopska salata',                en: 'Shopska Salad',                        price:  450 },
-      { cat: 'Салаты', ru: 'Зелёный салат',                sr: 'Zelena salata',                en: 'Green Salad',                          price:  400 },
+      { cat: 'Салаты', ru: 'Салат Цезарь с курицей',       sr: 'Cezar salata sa piletinom',       en: 'Caesar Salad with Chicken',       price: 1550 },
+      { cat: 'Салаты', ru: 'Салат с хрустящим баклажаном', sr: 'Salata sa hrskavim patlidžanom',  en: 'Crispy Eggplant Salad',           price: 1150 },
+      { cat: 'Салаты', ru: 'Салат Оливье',                 sr: 'Ruska salata',                    en: 'Olivier Salad',                   price:  650 },
+      { cat: 'Салаты', ru: 'Винегрет',                     sr: 'Salata Vinaigret',                en: 'Vinaigrette Salad',               price:  600 },
+      { cat: 'Салаты', ru: 'Греческий салат',              sr: 'Grčka salata',                    en: 'Greek Salad',                     price:  650 },
+      { cat: 'Салаты', ru: 'Тёплый салат с курицей',       sr: 'Topla salata sa piletinom',       en: 'Warm Chicken Salad',              price: 1450 },
+      { cat: 'Салаты', ru: 'Салат с куриной печенью',      sr: 'Salata sa džigericom',            en: 'Chicken Liver Salad',             price: 1250 },
+      { cat: 'Салаты', ru: 'Шопский салат',                sr: 'Šopska salata',                   en: 'Shopska Salad',                   price:  450 },
+      { cat: 'Салаты', ru: 'Зелёный салат',                sr: 'Zelena salata',                   en: 'Green Salad',                     price:  400 },
       // Супы
-      { cat: 'Супы',   ru: 'Куриный суп',                  sr: 'Pileća supa',                  en: 'Chicken Soup',                         price:  500 },
-      { cat: 'Супы',   ru: 'Борщ',                         sr: 'Boršč',                        en: 'Borscht',                              price:  850 },
-      { cat: 'Супы',   ru: 'Рыбная уха',                   sr: 'Riblja čorba',                 en: 'Fish Soup',                            price: 1050 },
+      { cat: 'Супы',   ru: 'Куриный суп',                  sr: 'Pileća supa',                     en: 'Chicken Soup',                    price:  500 },
+      { cat: 'Супы',   ru: 'Борщ',                         sr: 'Boršč',                           en: 'Borscht',                         price:  850 },
+      { cat: 'Супы',   ru: 'Рыбная уха',                   sr: 'Riblja čorba',                    en: 'Fish Soup',                       price: 1050 },
       // Соусы
-      { cat: 'Соусы',  ru: 'Красный шашлычный соус',       sr: 'Domaći sos pikantni',          en: 'Red Shashlik Sauce',                   price:  100 },
-      { cat: 'Соусы',  ru: 'Белый чесночный соус',         sr: 'Beli domaći sos',              en: 'White Garlic Sauce',                   price:  100 },
-      { cat: 'Соусы',  ru: 'Гранатовый соус Наршараб',     sr: 'Naršarab',                     en: 'Narsharab Pomegranate Sauce',          price:  200 },
+      { cat: 'Соусы',  ru: 'Красный шашлычный соус',       sr: 'Domaći sos pikantni',             en: 'Red Shashlik Sauce',              price:  100 },
+      { cat: 'Соусы',  ru: 'Белый чесночный соус',         sr: 'Beli domaći sos',                 en: 'White Garlic Sauce',              price:  100 },
+      { cat: 'Соусы',  ru: 'Гранатовый соус Наршараб',     sr: 'Naršarab',                        en: 'Narsharab Pomegranate Sauce',     price:  200 },
       // Шаурма
-      { cat: 'Шаурма', ru: 'Шаурма с курицей',             sr: 'Šaurma sa piletinom',          en: 'Chicken Shawarma',                     price:  800 },
-      { cat: 'Шаурма', ru: 'Шаурма со свининой',           sr: 'Šaurma sa svinjetinom',        en: 'Pork Shawarma',                        price:  800 },
+      { cat: 'Шаурма', ru: 'Шаурма с курицей',             sr: 'Šaurma sa piletinom',             en: 'Chicken Shawarma',                price:  800 },
+      { cat: 'Шаурма', ru: 'Шаурма со свининой',           sr: 'Šaurma sa svinjetinom',           en: 'Pork Shawarma',                   price:  800 },
       // Бртуч
-      { cat: 'Бртуч',  ru: 'Бртуч с курицей',              sr: 'Brtuč piletina',               en: 'Brtuch with Chicken',                  price:  700 },
-      { cat: 'Бртуч',  ru: 'Бртуч со свининой',            sr: 'Brtuč svinjetina',             en: 'Brtuch with Pork',                     price:  700 },
+      { cat: 'Бртуч',  ru: 'Бртуч с курицей',              sr: 'Brtuč piletina',                  en: 'Brtuch with Chicken',             price:  700 },
+      { cat: 'Бртуч',  ru: 'Бртуч со свининой',            sr: 'Brtuč svinjetina',                en: 'Brtuch with Pork',                price:  700 },
     ];
 
     const CATS = [...new Set(MENU.map(i => i.cat))];
-
     let currentLang = 'ru';
     let currentCat  = 'all';
 
-    function itemName(item, lang) {
-      return item[lang] || item.ru;
-    }
+    function catLabel(cat) { return LANGS[currentLang].categories[cat] || cat; }
+    function catSub(cat)   { return LANGS[currentLang].catsSub[cat] || ''; }
 
-    function catLabel(cat, lang) {
-      return LANGS[lang]?.categories[cat] || cat;
+    function formatPrice(p) {
+      return p.toLocaleString('de') + '<span class="currency">din</span>';
     }
 
     function renderCategories() {
       const el = document.getElementById('categories');
-      const lang = LANGS[currentLang];
       el.innerHTML = '';
-
-      const all = document.createElement('button');
-      all.className = 'cat-pill' + (currentCat === 'all' ? ' active' : '');
-      all.textContent = lang.all;
-      all.addEventListener('click', () => { currentCat = 'all'; renderAll(); });
+      const all = makeTab(LANGS[currentLang].all, 'all');
       el.appendChild(all);
-
-      CATS.forEach(cat => {
-        const btn = document.createElement('button');
-        btn.className = 'cat-pill' + (currentCat === cat ? ' active' : '');
-        btn.textContent = catLabel(cat, currentLang);
-        btn.addEventListener('click', () => { currentCat = cat; renderAll(); });
-        el.appendChild(btn);
-      });
+      CATS.forEach(cat => el.appendChild(makeTab(catLabel(cat), cat)));
     }
 
-    function renderMenu() {
-      const grid = document.getElementById('menu-grid');
-      grid.innerHTML = '';
+    function makeTab(label, key) {
+      const btn = document.createElement('button');
+      btn.className = 'cat-tab' + (currentCat === key ? ' active' : '');
+      btn.textContent = label;
+      btn.addEventListener('click', () => {
+        currentCat = key;
+        renderAll();
+        // scroll active tab into view
+        btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      });
+      return btn;
+    }
 
+    function renderContent() {
+      const el = document.getElementById('content');
+      el.innerHTML = '';
       const catsToShow = currentCat === 'all' ? CATS : [currentCat];
+      const [primary, secondary] = NAME_FIELDS[currentLang];
 
       catsToShow.forEach(cat => {
         const items = MENU.filter(i => i.cat === cat);
         if (!items.length) return;
 
-        const group = document.createElement('div');
-        group.className = 'section-group';
+        const block = document.createElement('div');
+        block.className = 'section-block';
 
-        const title = document.createElement('h2');
-        title.className = 'section-title';
-        title.textContent = catLabel(cat, currentLang);
-        group.appendChild(title);
+        const h = document.createElement('h2');
+        h.className = 'section-heading';
+        h.textContent = catLabel(cat);
+        block.appendChild(h);
 
-        const itemsGrid = document.createElement('div');
-        itemsGrid.className = 'items-grid';
+        const sub = document.createElement('p');
+        sub.className = 'section-heading-sub';
+        sub.textContent = catSub(cat);
+        block.appendChild(sub);
+
+        const list = document.createElement('div');
+        list.className = 'items-list';
 
         items.forEach(item => {
-          const card = document.createElement('div');
-          card.className = 'item-card';
+          const row = document.createElement('div');
+          row.className = 'item-row';
 
-          const name = document.createElement('span');
-          name.className = 'item-name';
-          name.textContent = itemName(item, currentLang);
+          const info = document.createElement('div');
+          info.className = 'item-info';
 
-          const price = document.createElement('span');
+          const main = document.createElement('div');
+          main.className = 'item-main';
+          main.textContent = item[primary] || item.ru;
+
+          const sec = document.createElement('div');
+          sec.className = 'item-sub';
+          sec.textContent = item[secondary] || '';
+
+          info.appendChild(main);
+          if (sec.textContent) info.appendChild(sec);
+
+          const price = document.createElement('div');
           price.className = 'item-price';
-          price.textContent = item.price.toLocaleString('sr') + ' din';
+          price.innerHTML = formatPrice(item.price);
 
-          card.appendChild(name);
-          card.appendChild(price);
-          itemsGrid.appendChild(card);
+          row.appendChild(info);
+          row.appendChild(price);
+          list.appendChild(row);
         });
 
-        group.appendChild(itemsGrid);
-        grid.appendChild(group);
+        block.appendChild(list);
+        el.appendChild(block);
       });
     }
 
     function renderAll() {
       renderCategories();
-      renderMenu();
+      renderContent();
     }
 
-    // Language switcher
     document.querySelectorAll('.lang-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         currentLang = btn.dataset.lang;
-        document.documentElement.lang = currentLang === 'sr' ? 'sr' : currentLang === 'en' ? 'en' : 'ru';
+        document.documentElement.lang = { ru: 'ru', en: 'en', sr: 'sr' }[currentLang];
         renderAll();
       });
     });
