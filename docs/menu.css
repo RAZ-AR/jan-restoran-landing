@@ -73,7 +73,7 @@ body::after {
   top: 0; left: 0; right: 0;
   height: var(--header-h);
   z-index: 100;
-  background: rgba(0, 59, 107, 0.95);
+  background: rgba(255, 255, 255, 0.82);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
 }
@@ -87,10 +87,10 @@ body::after {
   gap: 18px;
 }
 .logo-link { display: flex; align-items: center; flex-shrink: 0; }
-.logo { height: 34px; width: auto; }
+.logo { height: 34px; width: auto; filter: brightness(0) saturate(100%) invert(18%) sepia(80%) saturate(900%) hue-rotate(190deg) brightness(80%); }
 
 .header-phone {
-  color: rgba(255,255,255,0.55);
+  color: rgba(0, 59, 107, 0.70);
   text-decoration: none;
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 0.80rem;
@@ -98,12 +98,12 @@ body::after {
   margin-right: auto;
   transition: color 0.2s;
 }
-.header-phone:hover { color: rgba(255,255,255,0.90); }
+.header-phone:hover { color: #003b6b; }
 
 .lang-switcher {
   display: flex;
   gap: 0;
-  background: rgba(255,255,255,0.10);
+  background: rgba(0, 59, 107, 0.08);
   border-radius: 6px;
   overflow: hidden;
 }
@@ -111,7 +111,7 @@ body::after {
   background: none;
   border: none;
   cursor: pointer;
-  color: rgba(255,255,255,0.45);
+  color: rgba(0, 59, 107, 0.50);
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 0.72rem;
   font-weight: 600;
@@ -120,10 +120,10 @@ body::after {
   transition: background 0.18s, color 0.18s;
 }
 .lang-btn.active {
-  background: rgba(255,255,255,0.18);
+  background: #003b6b;
   color: #fff;
 }
-.lang-btn:hover:not(.active) { color: rgba(255,255,255,0.75); }
+.lang-btn:hover:not(.active) { color: #003b6b; }
 
 .header-socials {
   display: flex;
@@ -138,10 +138,9 @@ body::after {
 }
 .header-social:hover { opacity: 1; }
 .header-social img {
-  height: 20px;
-  width: 20px;
+  height: 22px;
+  width: 22px;
   object-fit: contain;
-  filter: brightness(0) invert(1);
 }
 
 /* ── CATEGORY NAV ── */
