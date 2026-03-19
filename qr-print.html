@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Kodovi — ĐAN Popust</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <style>
+        body {
+            background: #fff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            font-size: 1.4rem;
+            color: #003b6b;
+            margin-bottom: 30px;
+        }
+        .qr-grid {
+            display: flex;
+            gap: 40px;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 20px;
+        }
+        .qr-item {
+            text-align: center;
+            border: 2px solid #003b6b;
+            border-radius: 16px;
+            padding: 24px 28px;
+            background: #f9f9f9;
+        }
+        .qr-item h2 {
+            font-size: 2.2rem;
+            color: #003b6b;
+            margin: 0 0 14px;
+        }
+        .qr-item p {
+            font-size: 0.9rem;
+            color: #555;
+            margin: 10px 0 0;
+        }
+        .qr-item .url {
+            font-size: 0.72rem;
+            color: #999;
+            word-break: break-all;
+            margin-top: 6px;
+        }
+        .print-btn {
+            display: block;
+            margin: 0 auto 30px;
+            padding: 12px 32px;
+            background: #003b6b;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        .print-btn:hover { background: #005099; }
+        @media print {
+            .no-print { display: none; }
+            body { padding: 0; }
+            .qr-item { break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+    <h1>ĐAN Restoran — QR Kodovi za Popust</h1>
+    <button class="print-btn no-print" onclick="window.print()">Odštampaj / Распечатать</button>
+
+    <div class="qr-grid">
+        <div class="qr-item">
+            <h2>10%</h2>
+            <div id="qr10"></div>
+            <p>Popust 10% / Скидка 10%</p>
+            <p class="url">raz-ar.github.io/jan-restoran-landing/discount10</p>
+        </div>
+        <div class="qr-item">
+            <h2>15%</h2>
+            <div id="qr15"></div>
+            <p>Popust 15% / Скидка 15%</p>
+            <p class="url">raz-ar.github.io/jan-restoran-landing/discount15</p>
+        </div>
+        <div class="qr-item">
+            <h2>20%</h2>
+            <div id="qr20"></div>
+            <p>Popust 20% / Скидка 20%</p>
+            <p class="url">raz-ar.github.io/jan-restoran-landing/discount20</p>
+        </div>
+    </div>
+
+    <script>
+        new QRCode(document.getElementById("qr10"), {
+            text: "https://raz-ar.github.io/jan-restoran-landing/discount10",
+            width: 200,
+            height: 200,
+            colorDark: "#003b6b",
+            colorLight: "#ffffff"
+        });
+        new QRCode(document.getElementById("qr15"), {
+            text: "https://raz-ar.github.io/jan-restoran-landing/discount15",
+            width: 200,
+            height: 200,
+            colorDark: "#003b6b",
+            colorLight: "#ffffff"
+        });
+        new QRCode(document.getElementById("qr20"), {
+            text: "https://raz-ar.github.io/jan-restoran-landing/discount20",
+            width: 200,
+            height: 200,
+            colorDark: "#003b6b",
+            colorLight: "#ffffff"
+        });
+    </script>
+</body>
+</html>
