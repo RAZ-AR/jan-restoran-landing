@@ -7,6 +7,45 @@
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="styles.css?v=2">
     <style>
+        .main-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 0 2rem;
+        }
+
+        .discount-shell {
+            width: min(100%, 560px);
+        }
+
+        .lang-switcher {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .lang-btn {
+            border: 1px solid rgba(255,255,255,0.36);
+            background: rgba(255,255,255,0.12);
+            color: rgba(255,255,255,0.82);
+            padding: 0.55rem 0.95rem;
+            border-radius: 999px;
+            font: 600 0.82rem/1 'Roboto', sans-serif;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            cursor: pointer;
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            transition: all 0.25s ease;
+        }
+
+        .lang-btn.active {
+            background: rgba(255,255,255,0.26);
+            color: #fff;
+            border-color: rgba(255,255,255,0.62);
+        }
+
         .discount-card {
             background: linear-gradient(135deg,
                 rgba(255,255,255,0.18) 0%,
@@ -17,22 +56,23 @@
             -webkit-backdrop-filter: blur(24px) saturate(1.4);
             border: 1.5px solid rgba(255,255,255,0.35);
             border-radius: 28px;
-            padding: 2.5rem 3rem;
+            padding: 2rem 1.5rem 1.6rem;
             text-align: center;
-            max-width: 340px;
-            width: 90%;
+            width: 100%;
             margin: 0 auto;
             box-shadow: 0 8px 40px rgba(0,0,0,0.3),
                         0 1px 4px rgba(255,255,255,0.12) inset;
             animation: welcomeAppear 0.9s ease both;
         }
+
         .discount-greeting {
             font-family: 'Roboto', sans-serif;
             font-size: 1rem;
-            color: rgba(255,255,255,0.75);
+            color: rgba(255,255,255,0.78);
             letter-spacing: 0.04em;
             margin: 0 0 0.5rem;
         }
+
         .discount-badge {
             font-family: 'SFT Schrifted Serif', serif;
             font-size: clamp(4.5rem, 20vw, 7.5rem);
@@ -47,24 +87,130 @@
                 2px 2px 12px rgba(0,0,0,0.8);
             margin: 0.2rem 0;
         }
+
         .discount-label {
             font-family: 'SFT Schrifted Serif', serif;
             font-style: italic;
             font-size: 1.3rem;
             color: rgba(255,255,255,0.88);
-            margin: 0.3rem 0 0;
+            margin: 0.3rem 0 1rem;
         }
-        .discount-note {
+
+        .restaurant-copy {
             font-family: 'Roboto', sans-serif;
-            font-size: 0.82rem;
-            color: rgba(255,255,255,0.5);
-            margin-top: 1.2rem;
-            letter-spacing: 0.06em;
+            font-size: 0.98rem;
+            line-height: 1.6;
+            color: rgba(255,255,255,0.88);
+            max-width: 31rem;
+            margin: 0 auto 1.2rem;
         }
-        .main-content {
+
+        .rules-box {
+            text-align: left;
+            background: rgba(10, 10, 10, 0.18);
+            border: 1px solid rgba(255,255,255,0.16);
+            border-radius: 20px;
+            padding: 1rem 1rem 0.85rem;
+            margin: 0 auto 1.3rem;
+        }
+
+        .rules-title {
+            font: italic 700 1.05rem/1.3 'SFT Schrifted Serif', serif;
+            color: rgba(255,255,255,0.94);
+            margin: 0 0 0.7rem;
+            letter-spacing: 0.03em;
+        }
+
+        .rules-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: grid;
+            gap: 0.55rem;
+        }
+
+        .rules-list li {
+            font: 400 0.92rem/1.5 'Roboto', sans-serif;
+            color: rgba(255,255,255,0.8);
+            padding-left: 1.1rem;
+            position: relative;
+        }
+
+        .rules-list li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: rgba(255,215,0,0.95);
+        }
+
+        .menu-btn-row {
             display: flex;
+            justify-content: center;
+        }
+
+        .menu-glass-btn {
+            display: inline-flex;
             align-items: center;
             justify-content: center;
+            gap: 0.65rem;
+            padding: 0.8rem 1.45rem;
+            min-width: 220px;
+            background: linear-gradient(
+                135deg,
+                rgba(255,255,255,0.24) 0%,
+                rgba(255,255,255,0.09) 50%,
+                rgba(255,255,255,0.18) 100%
+            );
+            backdrop-filter: blur(24px) saturate(1.5);
+            -webkit-backdrop-filter: blur(24px) saturate(1.5);
+            border: 1.5px solid rgba(255,255,255,0.45);
+            border-radius: 999px;
+            color: #fff;
+            text-decoration: none;
+            font: 600 0.86rem/1 'Roboto', sans-serif;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            box-shadow:
+                0 4px 24px rgba(0, 0, 0, 0.18),
+                0 1px 4px rgba(255, 255, 255, 0.12) inset;
+            transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .menu-glass-btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            border-color: rgba(255,255,255,0.65);
+            box-shadow:
+                0 8px 32px rgba(0, 0, 0, 0.28),
+                0 2px 6px rgba(255, 255, 255, 0.18) inset;
+        }
+
+        .menu-icon-svg {
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 1.2rem;
+            }
+
+            .discount-card {
+                padding: 1.5rem 1rem 1.1rem;
+            }
+
+            .restaurant-copy {
+                font-size: 0.92rem;
+            }
+
+            .rules-list li {
+                font-size: 0.88rem;
+            }
+
+            .menu-glass-btn {
+                min-width: 100%;
+            }
         }
     </style>
 </head>
@@ -79,10 +225,36 @@
         </header>
 
         <main class="main-content">
-            <div class="discount-card">
-                <p class="discount-greeting">Poštovani goste / Уважаемый гость</p>
-                <div class="discount-badge">20%</div>
-                <p class="discount-label">popust / скидка</p>
+            <div class="discount-shell">
+                <div class="lang-switcher" aria-label="Language switcher">
+                    <button class="lang-btn" data-lang="ru" type="button">RU</button>
+                    <button class="lang-btn" data-lang="en" type="button">EN</button>
+                    <button class="lang-btn" data-lang="sr" type="button">SR</button>
+                </div>
+
+                <div class="discount-card">
+                    <p class="discount-greeting" data-i18n="greeting"></p>
+                    <div class="discount-badge">20%</div>
+                    <p class="discount-label" data-i18n="discountLabel"></p>
+                    <p class="restaurant-copy" data-i18n="restaurantDescription"></p>
+
+                    <section class="rules-box" aria-labelledby="rules-title">
+                        <h2 class="rules-title" id="rules-title" data-i18n="rulesTitle"></h2>
+                        <ul class="rules-list">
+                            <li data-i18n="ruleQr"></li>
+                            <li data-i18n="rulePage"></li>
+                        </ul>
+                    </section>
+
+                    <div class="menu-btn-row">
+                        <a href="docs/menu.html" class="menu-glass-btn">
+                            <svg class="menu-icon-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                            <span data-i18n="menuButton"></span>
+                        </a>
+                    </div>
+                </div>
             </div>
         </main>
 
@@ -92,10 +264,93 @@
                 <p class="address">Prizrenska 15, Stari Grad, Beograd</p>
                 <p class="phone">Phone: <a href="tel:+38163446454">+381 63 44 64 54</a></p>
             </div>
-            <div class="menu-btn-row">
-                <a href="index.html" class="menu-glass-btn">← Početna</a>
-            </div>
         </footer>
     </div>
+
+    <script>
+        const translations = {
+            ru: {
+                title: 'ĐAN Restoran — Скидка 20%',
+                greeting: 'Уважаемый гость',
+                discountLabel: 'скидка',
+                restaurantDescription: 'Ресторан Джан. Блюда традиционной кавказской кухни, приготовленные на мангале на углях.',
+                rulesTitle: 'Правила пользования',
+                ruleQr: 'Покажите QR-код официанту перед расчетом и получите скидку.',
+                rulePage: 'Скидка применяется при предъявлении этой страницы до оплаты заказа.',
+                menuButton: 'Меню'
+            },
+            en: {
+                title: 'ĐAN Restoran — 20% Discount',
+                greeting: 'Dear guest',
+                discountLabel: 'discount',
+                restaurantDescription: 'ĐAN Restaurant. Traditional Caucasian cuisine prepared on a charcoal grill.',
+                rulesTitle: 'How to use',
+                ruleQr: 'Show the QR code to the waiter before paying and receive your discount.',
+                rulePage: 'The discount is applied when this page is shown before the bill is paid.',
+                menuButton: 'Menu'
+            },
+            sr: {
+                title: 'ĐAN Restoran — Popust 20%',
+                greeting: 'Poštovani goste',
+                discountLabel: 'popust',
+                restaurantDescription: 'Restoran ĐAN. Jela tradicionalne kavkaske kuhinje pripremljena na roštilju na ćumuru.',
+                rulesTitle: 'Pravila korišćenja',
+                ruleQr: 'Pokažite QR kod konobaru pre plaćanja i ostvarite popust.',
+                rulePage: 'Popust važi kada ovu stranicu pokažete pre naplate računa.',
+                menuButton: 'Meni'
+            }
+        };
+
+        const supportedLangs = ['ru', 'en', 'sr'];
+        const langButtons = Array.from(document.querySelectorAll('.lang-btn'));
+
+        function detectSystemLanguage() {
+            const candidates = [...(navigator.languages || []), navigator.language, navigator.userLanguage]
+                .filter(Boolean)
+                .map(lang => lang.toLowerCase());
+
+            for (const lang of candidates) {
+                if (lang.startsWith('ru')) return 'ru';
+                if (lang.startsWith('sr') || lang.startsWith('hr') || lang.startsWith('bs')) return 'sr';
+                if (lang.startsWith('en')) return 'en';
+            }
+
+            return 'sr';
+        }
+
+        function getInitialLanguage() {
+            const saved = localStorage.getItem('janDiscountLang');
+            if (supportedLangs.includes(saved)) {
+                return saved;
+            }
+            return detectSystemLanguage();
+        }
+
+        function applyTranslations(lang) {
+            const copy = translations[lang];
+            document.documentElement.lang = lang;
+            document.title = copy.title;
+
+            document.querySelectorAll('[data-i18n]').forEach(node => {
+                const key = node.dataset.i18n;
+                node.textContent = copy[key];
+            });
+
+            langButtons.forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+        }
+
+        let currentLang = getInitialLanguage();
+        applyTranslations(currentLang);
+
+        langButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                currentLang = btn.dataset.lang;
+                localStorage.setItem('janDiscountLang', currentLang);
+                applyTranslations(currentLang);
+            });
+        });
+    </script>
 </body>
 </html>
