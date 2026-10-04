@@ -3,69 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ĐAN Restoran - Beograd</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>ĐAN Restoran</title>
+    <meta name="theme-color" content="#000000">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sofia+Sans+Extra+Condensed:wght@900&display=swap">
+    <link rel="stylesheet" href="v2.css?v=5">
 </head>
 <body>
-    <div class="dance-background">
-        <video autoplay muted loop playsinline>
-            <source src="spring.mp4" type="video/mp4">
-        </video>
-        <div class="dance-overlay"></div>
-    </div>
+    <p class="sr-only">OPREZNO! ОСТОРОЖНО! CAUTION!</p>
 
-    <div class="container">
-        <!-- Логотип -->
-        <header class="logo-container">
-            <img src="Logo white.svg" alt="ĐAN Restoran Logo" class="logo">
-        </header>
+    <main class="stage">
+        <h1 class="caution" id="caution">
+            <span class="caution-word" id="caution-word" lang="sr">OPREZNO!</span>
+        </h1>
+        <div class="caution-still" id="caution-still" hidden>
+            <p lang="sr">OPREZNO!</p>
+            <p lang="ru">ОСТОРОЖНО!</p>
+            <p lang="en">CAUTION!</p>
+        </div>
+    </main>
 
-        <!-- Пустой main для центрирования -->
-        <main class="main-content"></main>
-
-        <!-- Фраза -->
-        <p class="welcome-text">Radujemo se vašoj poseti.</p>
-
-        <!-- Контакты -->
-        <footer class="contact-section">
-            <div class="contact-info">
-                <p class="address">ĐAN Restoran</p>
-                <p class="address">Prizrenska 15, Stari Grad, Beograd</p>
-                <p class="phone">Phone: <a href="tel:+38163446454">+381 63 44 64 54</a></p>
-            </div>
-
-            <!-- Соцсети -->
-            <div class="social-row">
-                <a href="https://wa.me/38163446454" target="_blank" rel="noopener noreferrer">
-                    <img src="WhatsApp.svg" alt="WhatsApp" class="social-icon">
-                </a>
-                <a href="https://t.me/DAN_restoran" target="_blank" rel="noopener noreferrer">
-                    <img src="Telegram_logo.svg" alt="Telegram" class="social-icon">
-                </a>
-                <a href="https://www.instagram.com/jan_belgrade" target="_blank" rel="noopener noreferrer">
-                    <img src="Instagram_logo_2022.svg" alt="Instagram" class="social-icon">
-                </a>
-            </div>
-
-            <!-- Доставка -->
-            <div class="delivery-row">
-                <a href="https://glovoapp.com/sr/rs/belgrade/stores/djan-restoran-beg" class="liquid-glass-btn" target="_blank" rel="noopener noreferrer">
-                    <img src="glovo.svg" alt="Glovo" class="btn-logo">
-                </a>
-                <a href="https://wolt.com/sr/srb/belgrade/restaurant/djan" class="liquid-glass-btn" target="_blank" rel="noopener noreferrer">
-                    <img src="wolt.svg" alt="Wolt" class="btn-logo">
-                </a>
-            </div>
-
-            <!-- Mute button -->
-            <div class="mute-button-container">
-                <button id="mute-button" class="mute-button">
-                    <img id="mute-icon" src="mute.svg" alt="Mute/Unmute" class="mute-icon">
-                </button>
-            </div>
-        </footer>
-    </div>
-
-    <script src="script.js"></script>
+    <script src="v2.js?v=5"></script>
 </body>
 </html>
